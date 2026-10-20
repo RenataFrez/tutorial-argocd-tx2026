@@ -25,7 +25,7 @@ Files under `argocd-apps/` are read by the `root-apps` Application, so they only
 
 ## Option A: Edit and Push from Your Laptop (Recommended)
 
-You edit files and run Git commands on your laptop using your preferred editor and whatever GitHub authentication you already have (SSH keys, credential manager, GitHub Desktop, etc.). kubectl and argocd commands run on the VM.
+You edit files and run Git commands on your laptop using your preferred editor and whatever GitHub authentication you already have (SSH keys, credential manager, GitHub Desktop, etc.). `kubectl` and `argocd` commands run on the VM.
 
 - **Laptop:** edit files, `git add`, `git commit`, `git push`
 - **Student VM:** `kubectl`, `argocd`, `curl`
@@ -35,13 +35,13 @@ This is the recommended approach because you use your own editor and your existi
 
 ## Option B: Edit on GitHub.com with the Browser Editor
 
-If you don't have Git installed locally, you can edit files directly on GitHub. Navigate to your forked repo and press `.` (period) to open a VS Code editor in your browser. Use the Source Control panel (Git icon in the left sidebar, looks like three circles connceted by lines, like the letter 'Y') to stage, commit, and push changes.
+If you don't have Git installed locally, you can edit files directly on GitHub. Navigate to your forked repo and press `.` (period) to open a VS Code editor in your browser. Use the Source Control panel (Git icon in the left sidebar, looks like three circles connected by lines, like the letter 'Y') to stage, commit, and push changes.
 
 - **Browser:** edit files, commit, push (via github.dev VS Code editor)
 - **Student VM:** `kubectl`, `argocd`, `curl`
 - **When the VM needs updated files** (one time in Part III): run `git pull` on the VM
 
-This assumes you are confortable with Github's VS code editor.
+This assumes you are comfortable with Github's VS code editor.
 
 ## Option C: Edit and Push from the Student VM Using a GitHub PAT
 
