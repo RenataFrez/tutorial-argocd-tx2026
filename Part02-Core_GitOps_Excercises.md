@@ -67,13 +67,21 @@ argocd app sync podinfo
 **VM Terminal 1:**
 
 ```bash
-kubectl get pods -l app=podinfo
+kubectl get pods
 curl localhost:32098 | jq .
 ```
 
 You should see podinfo's JSON response with version `6.13.0`.
 
 The podinfo service is exposed as a NodePort on port **32098**. You can also open `http://<your-vm-ip>:32098` in your browser to see the podinfo web UI.
+
+#### Kubernetes Labels
+
+You can add `-l app=podinfo` to only show pods with the label "app=podinfo", which is defined in the `deployment.yaml` manifest.
+
+```bash
+kubectl get pods -l app=podinfo
+```
 
 ## Exercise 2: Enable Auto-Sync and Self-Heal
 
@@ -98,8 +106,8 @@ Edit `p2-podinfo/deployment.yaml`; change `replicas: 1` to `replicas: 3`:
 **Laptop (Git):**
 
 ```bash
-# Edit the file, then:
-(editor) p2-podinfo/deployment.yaml
+# Edit the file, use your favorite editor, then:
+vim p2-podinfo/deployment.yaml
 git add p2-podinfo/deployment.yaml
 git commit -m "Scale podinfo to 3 replicas"
 git push origin main
@@ -130,22 +138,24 @@ Watch ArgoCD detect the drift and scale back to 3. **Git always wins.**
 
 All the editing and Git work in this exercise happens in one place, then you switch to the VM once to verify.
 
+**Laptop (Git):**
+
 Edit `p2-podinfo/deployment.yaml`; make two changes:
 
 1. Upgrade the image tag from `6.13.0` to `6.14.0`
 2. Add a custom message,  find the `containers` section and add an `env:` block at the same indentation level as `image:` and `ports:`:
 
-   ```yaml
-       containers:
-       - name: podinfo
-         image: ghcr.io/stefanprodan/podinfo:6.14.0   # <-- updated
-         ports:
-         - containerPort: 9898
-           name: http
-         env:                                          # <-- add from here
-         - name: PODINFO_UI_MESSAGE
-           value: "Hello from ArgoCD tutorial!"
-   ```
+```yaml
+      containers:
+        - name: podinfo
+          image: ghcr.io/stefanprodan/podinfo:6.14.0  # <-- updated
+          ports:
+            - containerPort: 9898
+              name: http
+          env:                                          # <-- add from here
+            - name: PODINFO_UI_MESSAGE
+              value: "Hello from ArgoCD tutorial!"
+```
 
 Commit and push both changes together:
 
@@ -232,12 +242,12 @@ Open both in your browser to compare.
 
 ### Modify Helm values
 
-Edit `p2-podinfo-helm/app.yaml`; change the `ui.color` or `ui.message`, then re-apply. Because this file is VM-local, you edit it on the VM with `vim` or `nano`, with no Git step:
+In directory `p2-podinfo-helm/`. edit `app.yaml`; change the `ui.color` or `ui.message`, then re-apply. Because this file is VM-local, you edit it on the VM with `vim` or `nano`, with no Git commands:
 
 **VM Terminal 1:**
 
 ```bash
-(editor) p2-podinfo-helm/app.yaml
+vim app.yaml
 argocd app create -f app.yaml --upsert
 argocd app sync podinfo-helm
 ```

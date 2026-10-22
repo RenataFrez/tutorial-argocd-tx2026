@@ -35,7 +35,7 @@ cd ~/tutorial-argocd-tx2026
 git pull
 cp root-app.yaml.sample root-app.yaml
 # Edit root-app.yaml: replace <your-username> with your GitHub username
-(editor) root-app.yaml
+vim root-app.yaml
 argocd app create -f root-app.yaml
 ```
 
@@ -73,7 +73,7 @@ Change the `ui.message` value, then commit and push:
 **Laptop (Git):**
 
 ```bash
-(editor) argocd-apps/podinfo-helm.yaml
+vim argocd-apps/podinfo-helm.yaml
 git add argocd-apps/podinfo-helm.yaml
 git commit -m "Change podinfo-helm UI message"
 git push origin main
@@ -131,15 +131,19 @@ You can also open `http://<your-vm-ip>:32200` in your browser -- you should see 
 
 ### See templating in action
 
+**Laptop (Git):**
+
 On your **laptop**, edit `argocd-apps/appset-example.yaml` and add a second element to the list, under the first:
 
 ```yaml
-      - namespace: podinfo-appset-2
-        message: "Second instance from AppSet!"
-        color: "#ff6600"
-        replicas: "1"
-        nodePort: "32201"
+          - namespace: podinfo-appset-2
+            message: "Second instance from AppSet!"
+            color: "#ff6600"
+            replicas: "1"
+            nodePort: "32201"
 ```
+
+Make sure the YAML indentation is correct, the two `- namespace:` stanzas should line-up with each other.
 
 **Laptop (Git):**
 
@@ -193,7 +197,7 @@ Edit `argocd-apps/podinfo-helm.yaml` , change `targetRevision` to `99.99.99` (a 
 **Laptop (Git):**
 
 ```bash
-(editor) argocd-apps/podinfo-helm.yaml
+vim argocd-apps/podinfo-helm.yaml
 git add argocd-apps/podinfo-helm.yaml
 git commit -m "Break podinfo-helm with invalid chart version"
 git push origin main
@@ -273,7 +277,7 @@ Waves are set via `argocd.argoproj.io/sync-wave` annotations. Hooks are set via 
 ```bash
 cp p3-sync-waves-demo/app-sync-wave-demo.yaml.sample argocd-apps/app-sync-wave-demo.yaml
 # Edit: replace <your-username> with your GitHub username
-(editor) argocd-apps/app-sync-wave-demo.yaml
+vim argocd-apps/app-sync-wave-demo.yaml
 git add argocd-apps/app-sync-wave-demo.yaml
 git commit -m "Add sync-waves-demo to root-apps"
 git push origin main

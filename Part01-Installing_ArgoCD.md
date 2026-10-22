@@ -87,12 +87,17 @@ kubectl port-forward svc/argocd-server -n argocd 8443:443
 **Terminal 3**  open another terminal on your laptop for the SSH tunnel:
 
 ```bash
-ssh -C -N -L 8443:localhost:8443 student@<your-vm-ip>
+ssh -CNL 8443:localhost:8443 student@<your-vm-ip>
 ```
-
 > Leave this running.
 
 Open `https://localhost:8443` in your browser. Accept the self-signed certificate warning.
+
+Comand-line options:
+
+- `-C` Compression of all data
+- `-N` Do not execute remote commands
+- `-L` Specifies that connections to the given TCP port or Unix socket on the local (client) host are to be forwarded to the given host and port, or Unix socket, on the remote side.
 
 ### Fallback: NodePort
 
@@ -105,6 +110,8 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "por
 Open `https://<your-vm-ip>:32443` in your browser. Accept the self-signed certificate warning (requires that port 32443 is open in your VM's firewall).
 
 ## Log In
+
+Run this in **Terminal 1** (your main VM session).
 
 Get the initial admin password:
 
@@ -119,7 +126,7 @@ Log in via the browser UI. Optionally change the password under User Info.
 
 ## Verify
 
-Run this in **Terminal 1** (your main VM session).
+Again, run this in **Terminal 1** (your main VM session).
 
 **If using SSH tunnel (Terminals 2 + 3):**
 
