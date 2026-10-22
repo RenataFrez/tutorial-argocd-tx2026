@@ -21,8 +21,11 @@ You should see one node in `Ready` state.
 
 This tutorial uses a Git repository containing exercise files, configuration, and sample manifests. You'll fork it because ArgoCD needs a Git repo it can read from, throughout the tutorial you'll point ArgoCD at your fork so that commits and pushes you make trigger GitOps syncs. Working against the original upstream repo would not let you make changes.
 
+> The following is copied from README.md, you may have already done these steps.
+
 1. In your browser, fork `https://github.com/esnet/tutorial-argocd-tx2026` to your GitHub account
-2. On your VM (Terminal 1):
+1. SSH in to your assigned VM: `ssh student@<your-vm-ip>`
+1. On your VM (Terminal 1):
 
 ```bash
 git clone https://github.com/<your-username>/tutorial-argocd-tx2026.git
@@ -119,14 +122,7 @@ Get the initial admin password:
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
-Log in via the browser UI. Optionally change the password under User Info.
-
-- **Username:** `admin`
-- **Password:** (output from above)
-
-## Verify
-
-Again, run this in **Terminal 1** (your main VM session).
+Run this in **Terminal 1** (your main VM session).
 
 **If using SSH tunnel (Terminals 2 + 3):**
 
@@ -143,6 +139,13 @@ argocd cluster list
 ```
 
 You should see one cluster (the local `in-cluster`). ArgoCD is ready.
+
+### Web UI
+
+Log in via the browser UI. Optionally change the password under User Info.
+
+- **Username:** `admin`
+- **Password:** (output from above)
 
 ---
 

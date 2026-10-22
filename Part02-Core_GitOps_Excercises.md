@@ -91,13 +91,23 @@ In the ArgoCD UI: click on the `podinfo` app -> **DETAILS** -> **Edit** -> **Syn
 
 Click **Save**.
 
+> Info: It has been reported sometimes the Web UI save does not correclty change the auto-sync settings. There is a verification command below you can run to make sure the sync policy is set.
+
 Or via CLI, on the **VM Terminal 1**:
 
 ```bash
 argocd app set podinfo --sync-policy automated --auto-prune --self-heal
 ```
 
-Note: The command above should have no output, but it will still succeed.
+> Info: The command above should have no output, but it will still succeed.
+
+### Verify the sync policy
+
+```bash
+argocd app get podinfo -o json | jq '.spec.syncPolicy.automated'
+```
+
+Expected: an `automated` object, including `prune: true` and `selfHeal: true`. It should not say `null`.
 
 ### Test auto-sync
 
@@ -106,7 +116,7 @@ Edit `p2-podinfo/deployment.yaml`; change `replicas: 1` to `replicas: 3`:
 **Laptop (Git):**
 
 ```bash
-# Edit the file, use your favorite editor, then:
+# Edit the file, using your favorite editor (vim, nano, etc), then:
 vim p2-podinfo/deployment.yaml
 git add p2-podinfo/deployment.yaml
 git commit -m "Scale podinfo to 3 replicas"

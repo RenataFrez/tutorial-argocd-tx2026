@@ -119,6 +119,14 @@ argocd app sync root-apps
 
 `root-apps` picks up the new file, creates the ApplicationSet, and the ApplicationSet creates a `podinfo-podinfo-appset` Application automatically.
 
+
+List the ApplicaitonSets and Applications
+
+```bash
+kubectl get applicationsets -n argocd
+argocd app list
+```
+
 Verify:
 
 **VM Terminal 1:**

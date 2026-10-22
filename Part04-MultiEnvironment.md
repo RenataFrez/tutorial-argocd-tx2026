@@ -4,7 +4,7 @@
 
 ## Why Multiple Environments?
 
-Real-world applications run in multiple environments:
+Real-world applications run in multiple environments, example:
 
 - **Dev** : rapid iteration, testing new features
 - **Staging** : pre-production validation
@@ -168,6 +168,8 @@ Watch the ArgoCD UI, staging updates, dev and prod are unchanged.
 ### Scenario 2: Add a ConfigMap to production
 
 Steps 1 through 3 are all done on your **laptop**.
+
+**Laptop (Git):**
 
 **Step 1:** Create a new file `p4-multi-env-demo/overlays/prod/configmap.yaml`:
 
