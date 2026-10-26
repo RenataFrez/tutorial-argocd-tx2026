@@ -87,7 +87,7 @@ kubectl get pods -l app=podinfo
 
 ### Enable auto-sync
 
-In the ArgoCD UI: click on the `podinfo` app -> **DETAILS** -> **Edit** -> **Sync Policy** -> **ENABLE AUTO-SYNC**. Also Enable **Prune** and **Self Heal**.
+In the ArgoCD UI: click on the `podinfo` app -> **DETAILS** -> (Scroll down to) **Sync Policy** -> **ENABLE AUTO-SYNC**. Also Enable **Prune** and **Self Heal**.
 
 Click **Save**.
 
