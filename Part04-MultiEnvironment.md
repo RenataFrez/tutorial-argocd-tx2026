@@ -94,7 +94,7 @@ cd ~/tutorial-argocd-tx2026
 cp p4-multi-env-demo/app-multi-env-demo.yaml.sample argocd-apps/myapp-environments.yaml
 
 # Edit: replace <your-username> with your GitHub username
-(editor) argocd-apps/myapp-environments.yaml
+vim argocd-apps/myapp-environments.yaml
 git add argocd-apps/myapp-environments.yaml
 git commit -m "Add multi-environment ApplicationSet via App of Apps"
 git push origin main
